@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: groww-hdfc-faq
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run code/app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true --browser.gatherUsageStats false
+    healthCheckPath: /_stcore/health
+    envVars:
+      - key: MISTRAL_MODEL
+        value: mistral-small-latest
+      - key: MISTRAL_API_KEY
+        sync: false
