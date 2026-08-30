@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.streamlit/secrets.toml
+data/vector_db/*
+!data/vector_db/.gitkeep
+data/chunks/*
+!data/chunks/.gitkeep
+data/embeddings/*
+!data/embeddings/.gitkeep
+.pytest_cache/
+.DS_Store
+*.egg-info/
