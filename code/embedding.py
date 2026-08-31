@@ -1,4 +1,9 @@
-"""Phase 3 — Embedding: all-MiniLM-L6-v2, local/CPU, same model at index and query time."""
+"""Phase 3 — Embedding: all-MiniLM-L6-v2 via Chroma's ONNX runtime, local/CPU.
+
+Same model at index and query time. Runs on onnxruntime instead of
+torch/sentence-transformers so the full pipeline fits Render's free-tier
+(512 MB RAM) instance.
+"""
 
 from __future__ import annotations
 
@@ -12,12 +17,12 @@ _MODEL = None
 
 
 def get_model():
-    """Return the one shared MiniLM model instance (kept warm across queries)."""
+    """Return the one shared ONNX MiniLM embedder (kept warm across queries)."""
     global _MODEL
     if _MODEL is None:
-        from sentence_transformers import SentenceTransformer
+        from chromadb.utils.embedding_functions import DefaultEmbeddingFunction
 
-        _MODEL = SentenceTransformer(EMBEDDING_MODEL)
+        _MODEL = DefaultEmbeddingFunction()
     return _MODEL
 
 
@@ -26,8 +31,7 @@ def embed_texts(texts: list[str]) -> list[list[float]]:
     if not texts:
         raise ValueError("Nothing to embed: text list is empty")
     model = get_model()
-    vectors = model.encode(texts, normalize_embeddings=True, convert_to_numpy=True)
-    return [v.tolist() for v in vectors]
+    return [[float(x) for x in v] for v in model(texts)]
 
 
 def embed_question(question: str) -> list[float]:

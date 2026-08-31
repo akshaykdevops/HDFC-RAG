@@ -3,8 +3,8 @@ services:
     name: groww-hdfc-faq
     runtime: python
     plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: streamlit run code/app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true --browser.gatherUsageStats false
+    buildCommand: pip install -r requirements.txt && python -m code.ingest
+    startCommand: streamlit run code/app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true --server.fileWatcherType none --browser.gatherUsageStats false
     healthCheckPath: /_stcore/health
     envVars:
       - key: MISTRAL_MODEL
