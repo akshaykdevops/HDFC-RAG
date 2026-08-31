@@ -30,17 +30,6 @@ st.set_page_config(page_title="Groww HDFC Fund FAQ", page_icon="🌱", layout="c
 st.markdown(
     f"""
     <style>
-      :root {{ color-scheme: light dark; }}
-
-      .stApp {{
-        background: var(--background-color, #F6F6F6);
-        color: var(--text-color, #1B1B1B);
-      }}
-      h1, h2, h3 {{
-        color: var(--text-color, #1B1B1B) !important;
-        font-weight: 700;
-      }}
-
       .groww-banner {{
         background: {GROWW_GREEN};
         color: white;
@@ -49,26 +38,13 @@ st.markdown(
         margin-bottom: 1rem;
       }}
       .groww-banner p {{ margin: 0.35rem 0 0 0; opacity: 0.95; }}
-
       .disclaimer {{
-        color: var(--text-color, #6A6A6A);
         opacity: 0.8;
         font-size: 0.9rem;
         margin: 0.5rem 0 1rem 0;
       }}
-
-      .stChatMessage {{
-        background: var(--secondary-background-color, white);
-        color: var(--text-color, #1B1B1B);
-        border-radius: 10px;
-      }}
-
-      .stButton>button {{
-        background: var(--secondary-background-color, white);
-        color: var(--text-color, #1B1B1B);
-        border: 1px solid var(--text-color, #E0E0E0);
-        border-radius: 20px;
-      }}
+      .stChatMessage {{ border-radius: 10px; }}
+      .stButton>button {{ border-radius: 20px; }}
       .stButton>button:hover {{ border-color: {GROWW_GREEN}; color: {GROWW_GREEN}; }}
     </style>
     """,
